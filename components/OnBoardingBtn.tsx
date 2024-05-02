@@ -1,13 +1,14 @@
 import { View, Text, TouchableOpacity } from 'react-native'
 
 type Props = {
-    scrollTo: () => void
+    scrollTo: () => void,
+    btnText : string
 }
 
-const OnBoardingBtn = ({ scrollTo }: Props) => {
+const OnBoardingBtn = ({ scrollTo, btnText }: Props) => {
     return (
         <TouchableOpacity className='border-cyan-700 p-6 bg-purple-600 justify-center items-center' activeOpacity={.8} onPress={scrollTo}>
-            <Text className='text-white'>OnBoardingBtn</Text>
+            <Text className='text-white'>{btnText}</Text>
         </TouchableOpacity>
     )
 }

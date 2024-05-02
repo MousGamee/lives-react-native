@@ -69,7 +69,7 @@ const OnBoarding = () => {
                 }}
             />
             <Paginator data={slides} scrollX={scrollX} />
-            <OnBoardingBtn scrollTo={scrollTo}/>
+            <OnBoardingBtn scrollTo={scrollTo} btnText={currentIndex < slides.length - 1 ? 'Next' : 'Get started'}/>
         </View>
 
     )
