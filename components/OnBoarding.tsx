@@ -4,6 +4,8 @@ import { image } from '../constants'
 import OnBoardingItems from './OnBoardingItems'
 import Paginator from './Paginator'
 import OnBoardingBtn from './OnBoardingBtn'
+import { router } from 'expo-router'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 const slides = [
     {
@@ -34,16 +36,22 @@ const OnBoarding = () => {
     const viewConfig = useRef({ viewAreaCoveragePercentThreshold: 50 }).current
     const slideRef = useRef(null)
 
-    const scrollTo = () => {
-        if(currentIndex < slides.length - 1){
-            slideRef.current.scrollToIndex({ index: currentIndex + 1})
+    const scrollTo = async () => {
+        if (currentIndex < slides.length - 1) {
+            slideRef.current.scrollToIndex({ index: currentIndex + 1 })
         } else {
-            console.log('last item')
+            try {
+                await AsyncStorage.setItem('@viewdOnBoarding', 'true')
+                router.replace('/signIn')
+            } catch (error) {
+                console.log('Error  => ', error)
+            }
         }
     }
 
+
     return (
-        <View>
+        <View className='bg-black h-full'>
             <FlatList
                 horizontal
                 pagingEnabled
@@ -68,8 +76,10 @@ const OnBoarding = () => {
                     )
                 }}
             />
-            <Paginator data={slides} scrollX={scrollX} />
-            <OnBoardingBtn scrollTo={scrollTo} btnText={currentIndex < slides.length - 1 ? 'Next' : 'Get started'}/>
+            <View className='pb-5 px-3'>
+                <Paginator data={slides} scrollX={scrollX} />
+                <OnBoardingBtn scrollTo={scrollTo} btnText={currentIndex < slides.length - 1 ? 'Next' : 'Get started'} />
+            </View>
         </View>
 
     )

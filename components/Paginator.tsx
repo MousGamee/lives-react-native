@@ -9,7 +9,7 @@ type Props = {
 const Paginator = ({ data, scrollX }: Props) => {
     const { width } = useWindowDimensions()
     return (
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <View className='flex-row justify-center items-center mb-5'>
             {data.map((_, i) => {
                 const inputRange = [(i - 1) * width, i * width, (i + 1) * width]
                 const dotWidth = scrollX.interpolate({
@@ -19,7 +19,13 @@ const Paginator = ({ data, scrollX }: Props) => {
                 })
                 const opacity = scrollX.interpolate({
                     inputRange,
-                    outputRange: [.3, 1, .3],
+                    outputRange: [.7, 1, .7],
+                    extrapolate: 'clamp'
+                })
+
+                const bgColor = scrollX.interpolate({
+                    inputRange,
+                    outputRange: ['#3F3F3F', '#880185', '#3F3F3F'],
                     extrapolate: 'clamp'
                 })
 
@@ -28,9 +34,9 @@ const Paginator = ({ data, scrollX }: Props) => {
                         height: 10,
                         borderRadius: 5,
                         marginHorizontal: 3,
-                        backgroundColor: '#880185',
+                        backgroundColor: bgColor,
                         width: dotWidth,
-                        opacity : opacity
+                        opacity: opacity
                     }} />
                 )
             })}
