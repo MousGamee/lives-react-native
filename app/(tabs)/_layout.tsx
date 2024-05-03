@@ -5,18 +5,16 @@ import routes from '../../constants/routes'
 import { AntDesign, MaterialCommunityIcons } from '@expo/vector-icons'
 
 type TabItems = {
-  size? : number,
-  color? : string,
-  focused? : boolean,
-  label : string,
-  icon? : JSX.Element
+  size?: number,
+  color?: string,
+  focused?: boolean,
+  label: string,
+  icon?: JSX.Element
 }
 const TabItems = ({
-  size,
-  color,
   focused,
   label,
-  icon 
+  icon
 }: TabItems) => {
   return (
     <View className='flex justify-center items-center gap-1'>
@@ -52,13 +50,13 @@ const TabsLayout = () => {
           title: 'Home',
           tabBarIcon: ({ color, size, focused }) => {
             return (
-             <TabItems 
+              <TabItems
                 label='Home'
                 color={color}
                 focused={focused}
                 size={size}
                 icon={<AntDesign name="home" size={size} color={color} />}
-             />
+              />
             )
           }
         }}
@@ -67,15 +65,15 @@ const TabsLayout = () => {
       <Tabs.Screen name={routes.search}
         options={{
           title: 'Search',
-          tabBarIcon: ({ color, size,focused }) => {
+          tabBarIcon: ({ color, size, focused }) => {
             return (
-              <TabItems 
-              label='Search'
-              color={color}
-              focused={focused}
-              size={size}
-              icon={ <AntDesign name="search1" size={size} color={color} />}
-           />
+              <TabItems
+                label='Search'
+                color={color}
+                focused={focused}
+                size={size}
+                icon={<AntDesign name="search1" size={size} color={color} />}
+              />
             )
           }
         }} />
@@ -98,30 +96,28 @@ const TabsLayout = () => {
           title: 'Following',
           tabBarIcon: ({ color, size, focused }) => {
             return (
-              <TabItems 
-              label='Following'
-              color={color}
-              focused={focused}
-              size={size}
-              icon={<MaterialCommunityIcons name="movie-filter" size={size} color={color} /> }
-           />
-              
+              <TabItems
+                label='Following'
+                color={color}
+                focused={focused}
+                size={size}
+                icon={<MaterialCommunityIcons name="movie-filter" size={size} color={color} />}
+              />
             )
           }
         }} />
       <Tabs.Screen name={routes.profile}
         options={{
           title: 'Profile',
-          tabBarIcon: ({ color, size,focused }) => {
+          tabBarIcon: ({ color, size, focused }) => {
             return (
-              <TabItems 
-              label='Profile'
-              color={color}
-              focused={focused}
-              size={size}
-              icon={<AntDesign name="user" size={size} color={color} />}
-           />
-              
+              <TabItems
+                label='Profile'
+                color={color}
+                focused={focused}
+                size={size}
+                icon={<AntDesign name="user" size={size} color={color} />}
+              />
             )
           }
         }} />
