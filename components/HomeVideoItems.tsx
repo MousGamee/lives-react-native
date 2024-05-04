@@ -1,29 +1,74 @@
-import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from 'react-native'
-import React, { useState } from 'react'
-import { ResizeMode, Video } from 'expo-av'
+import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity, Pressable } from 'react-native'
+import React, { useRef, useState } from 'react'
+import { AVPlaybackStatus, ResizeMode, Video } from 'expo-av'
 import fakeVideosData from '../constants/fakeVideosData'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { AntDesign, FontAwesome, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
+import { AntDesign, Feather, FontAwesome, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
+import { LinearGradient } from 'expo-linear-gradient'
 
-const HomeVideoItems = () => {
+
+type Props = {
+    description?: string
+    sources: string
+    subtitle?: string
+    thumb?: string
+    title: string
+}
+const HomeVideoItems = ({
+    description,
+    sources,
+    subtitle,
+    thumb,
+    title
+}: Props) => {
+
+    const video = useRef<Video>(null)
+
     const [isLiked, setIsLiked] = useState<boolean>(false)
     const [isSaved, setIsSaved] = useState<boolean>(false)
+    const [status, setStatus] = useState<AVPlaybackStatus>()
     const { height } = useWindowDimensions()
     const VIDEO_HEIGHT = height - (height * .105)
+
+    const isPlaying = status?.isLoaded && status.isPlaying
+
+    const handleVideo = () => {
+        if (!video.current) { return }
+        if (isPlaying) {
+            video.current.pauseAsync()
+        } else video.current.playAsync()
+    }
     return (
-        <View className='flex-1'>
+        <View className='flex-1 bg-black' style={{ height : VIDEO_HEIGHT}}>
             <Video
-                style={[StyleSheet.absoluteFill, { height: VIDEO_HEIGHT }]}
+            isMuted={false}
+                isLooping
                 shouldPlay
+                ref={video}
+                style={[StyleSheet.absoluteFill, { height: '100%', zIndex : 1 }]}
                 resizeMode={ResizeMode.COVER}
-                source={{ uri: fakeVideosData[0].sources }}
+                source={{ uri: sources}}
+                onPlaybackStatusUpdate={setStatus}
             />
-            <SafeAreaView className='flex flex-1 px-3'>
+            <Pressable
+            style={{ zIndex : 34}}
+                onPress={handleVideo}
+                className='flex flex-1 px-3'>
+                {!isPlaying && <Feather name="play-circle" size={70} color="white" style={{
+                    position: 'absolute',
+                    top: (height / 2),
+                    alignSelf: 'center'
+
+                }} />}
+                <LinearGradient
+                    colors={['transparent', 'rgba(0,0,0,.8)']}
+                    style={[StyleSheet.absoluteFill, { top: '50%', }]}
+                />
                 {/* footer */}
-                <View className='mt-auto flex flex-row'>
+                <SafeAreaView className='mt-auto flex flex-row'>
                     {/* caption */}
                     <View className='flex-1 justify-end'>
-                        <Text className='text-white font-pregular text-sm'>{fakeVideosData[0].title}</Text>
+                        <Text className='text-white font-pregular text-sm'>{title}</Text>
                     </View>
                     {/* right icons */}
                     <View className='flex gap-2'>
@@ -36,17 +81,17 @@ const HomeVideoItems = () => {
                             <Text className='text-white font-plight text-xs'>56</Text>
                         </TouchableOpacity>
                         <TouchableOpacity className='flex justify-center items-center gap-1'>
-                        <Ionicons name="arrow-redo-outline" size={30} color="white" />
+                            <Ionicons name="arrow-redo-outline" size={30} color="white" />
                             <Text className='text-white font-plight text-xs'>6k5</Text>
                         </TouchableOpacity>
                         <TouchableOpacity className='flex justify-center items-center gap-1' onPress={() => setIsSaved(!isSaved)}>
-                       { isSaved ? <FontAwesome name="bookmark" size={30} color="white" /> : <FontAwesome name="bookmark-o" size={30} color="white" />}
+                            {isSaved ? <FontAwesome name="bookmark" size={30} color="white" /> : <FontAwesome name="bookmark-o" size={30} color="white" />}
                             <Text className='text-white font-plight text-xs'>6k5</Text>
                         </TouchableOpacity>
                     </View>
-                </View>
+                </SafeAreaView>
 
-            </SafeAreaView>
+            </Pressable>
         </View>
     )
 }

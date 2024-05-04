@@ -1,14 +1,29 @@
-import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from 'react-native'
-import { Video, ResizeMode } from 'expo-av'
-import fakeVideosData from '../../constants/fakeVideosData'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { AntDesign } from '@expo/vector-icons'
 import HomeVideoItems from '../../components/HomeVideoItems'
+import { StatusBar } from 'expo-status-bar'
+import { FlatList } from 'react-native'
+import fakeVideosData from '../../constants/fakeVideosData'
 
 const Home = () => {
- 
+
   return (
-   <HomeVideoItems />
+    <>
+      <StatusBar style='light' />
+      <FlatList
+        scrollEventThrottle={32}
+        data={fakeVideosData}
+        keyExtractor={item => item.title}
+        pagingEnabled
+        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => {
+          return (
+            <HomeVideoItems
+              sources={item.sources}
+              title={item.title} />
+          )
+        }}
+      />
+
+    </>
   )
 }
 
