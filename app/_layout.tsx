@@ -2,6 +2,7 @@ import { View, Text } from 'react-native'
 import React, { useEffect } from 'react'
 import { Redirect, SplashScreen, Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
+import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
 const MainLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -14,24 +15,26 @@ const MainLayout = () => {
     "Poppins-Regular": require("../assets/fonts/Poppins-Regular.ttf"),
     "Poppins-SemiBold": require("../assets/fonts/Poppins-SemiBold.ttf"),
     "Poppins-Thin": require("../assets/fonts/Poppins-Thin.ttf"),
-});
+  });
 
-useEffect(() => {
+  useEffect(() => {
 
     if (error) throw error
 
     if (fontsLoaded) SplashScreen.hideAsync()
 
-}, [fontsLoaded, error])
+  }, [fontsLoaded, error])
 
-if (!fontsLoaded && !error) return null
+  if (!fontsLoaded && !error) return null
 
   return (
-        <Stack screenOptions={{
-            headerShown : false
-        }}>
-            <Stack.Screen name='index' />
-        </Stack>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <Stack screenOptions={{
+        headerShown: false
+      }}>
+        <Stack.Screen name='index' />
+      </Stack>
+    </GestureHandlerRootView>
   )
 }
 

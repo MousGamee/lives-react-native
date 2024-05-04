@@ -1,25 +1,29 @@
 import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity, Pressable } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { memo, useEffect, useMemo, useRef, useState } from 'react'
 import { AVPlaybackStatus, ResizeMode, Video } from 'expo-av'
 import fakeVideosData from '../constants/fakeVideosData'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { AntDesign, Feather, FontAwesome, Ionicons, SimpleLineIcons } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
 
-
 type Props = {
+    id : number,
     description?: string
     sources: string
     subtitle?: string
     thumb?: string
-    title: string
+    title: string,
+    handleOpenBottomSheet?: () => void,
+    activeVideo? : any
 }
 const HomeVideoItems = ({
     description,
     sources,
     subtitle,
     thumb,
-    title
+    title,
+    id,
+    activeVideo
 }: Props) => {
 
     const video = useRef<Video>(null)
@@ -38,20 +42,33 @@ const HomeVideoItems = ({
             video.current.pauseAsync()
         } else video.current.playAsync()
     }
+
+    useEffect(() => {
+        if(!video.current){
+            return
+        }
+        if(activeVideo !== id){
+            video.current.pauseAsync()
+        }
+        if(activeVideo == id){
+            video.current.playAsync()
+        }
+    },[activeVideo, video.current])
+
     return (
-        <View className='flex-1 bg-black' style={{ height : VIDEO_HEIGHT}}>
+        <View className='flex-1 bg-black' style={{ height: VIDEO_HEIGHT }}>
             <Video
-            isMuted={false}
+                volume={1.0}
+                isMuted={false}
                 isLooping
-                shouldPlay
                 ref={video}
-                style={[StyleSheet.absoluteFill, { height: '100%', zIndex : 1 }]}
+                style={[StyleSheet.absoluteFill, { height: '100%', zIndex: 1 }]}
                 resizeMode={ResizeMode.COVER}
-                source={{ uri: sources}}
+                source={{ uri: sources }}
                 onPlaybackStatusUpdate={setStatus}
             />
             <Pressable
-            style={{ zIndex : 34}}
+                style={{ zIndex: 34 }}
                 onPress={handleVideo}
                 className='flex flex-1 px-3'>
                 {!isPlaying && <Feather name="play-circle" size={70} color="white" style={{
@@ -92,8 +109,9 @@ const HomeVideoItems = ({
                 </SafeAreaView>
 
             </Pressable>
+
         </View>
     )
 }
 
-export default HomeVideoItems
+export default memo(HomeVideoItems)
