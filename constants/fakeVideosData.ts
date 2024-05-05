@@ -6,7 +6,9 @@ export default [
         subtitle: "By Blender Foundation",
         thumb: "images/BigBuckBunny.jpg",
         title: "Big Buck Bunny",
-        id : 1
+        id : 1,
+        createdBy : 'Harry Potter',
+        creatorAvatar : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'
     },
     {
         description: "The first Blender Open Movie from 2006",
@@ -14,7 +16,10 @@ export default [
         subtitle: "By Blender Foundation",
         thumb: "images/ElephantsDream.jpg",
         title: "Elephant Dream",
-        id : 2
+        id : 2,
+        createdBy : 'Jhon Doe',
+        creatorAvatar : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'
+
     },
     {
         description: "HBO GO now works with Chromecast -- the easiest way to enjoy online video on your TV. For when you want to settle into your Iron Throne to watch the latest episodes. For $35.\nLearn how to use Chromecast with HBO GO and more at google.com/chromecast.",
@@ -22,7 +27,10 @@ export default [
         subtitle: "By Google",
         thumb: "images/ForBiggerBlazes.jpg",
         title: "For Bigger Blazes",
-        id : 3
+        id : 3,
+        createdBy : 'MousGame',
+        creatorAvatar : 'https://e7.pngegg.com/pngimages/799/987/png-clipart-computer-icons-avatar-icon-design-avatar-heroes-computer-wallpaper-thumbnail.png'
+
     },
     {
         description: "Introducing Chromecast. The easiest way to enjoy online video and music on your TV—for when Batman's escapes aren't quite big enough. For $35. Learn how to use Chromecast with Google Play Movies and more at google.com/chromecast.",

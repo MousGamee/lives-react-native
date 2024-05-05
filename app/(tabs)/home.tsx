@@ -30,8 +30,8 @@ const Home = () => {
         viewabilityConfig={{
           itemVisiblePercentThreshold : 50
         }}
-        // initialNumToRender={3}
-        // windowSize={3}
+        // initialNumToRender={1}
+        // windowSize={2}
         // maxToRenderPerBatch={3}
         renderItem={({ item }) => {
           return (
@@ -40,6 +40,9 @@ const Home = () => {
               title={item.title}
               activeVideo={activeVideo}
               id={item.id}
+              createdBy={item.createdBy}
+              creatorAvatar={item.creatorAvatar}
+              description={item.description}
             />
           )
         }}

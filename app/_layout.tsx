@@ -1,8 +1,8 @@
-import { View, Text } from 'react-native'
 import React, { useEffect } from 'react'
-import { Redirect, SplashScreen, Stack } from 'expo-router'
+import { SplashScreen, Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
+import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
 
 const MainLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -29,11 +29,13 @@ const MainLayout = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack screenOptions={{
-        headerShown: false
-      }}>
-        <Stack.Screen name='index' />
-      </Stack>
+      <BottomSheetModalProvider>
+        <Stack screenOptions={{
+          headerShown: false
+        }}>
+          <Stack.Screen name='index' />
+        </Stack>
+      </BottomSheetModalProvider>
     </GestureHandlerRootView>
   )
 }
