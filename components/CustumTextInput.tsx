@@ -20,7 +20,7 @@ const CustumTextInput = ({
   style
 }: Props) => {
   return (
-    <View className={`flex flex-row justify-center py-4 px-3 rounded-xl w-full focus:border-fuchsia-300 bg-neutral-700 ${containerStyle}`}>
+    <View className={`flex flex-row justify-center py-4 px-3 rounded-xl focus:border-fuchsia-300 bg-neutral-700 ${containerStyle}`}>
       {icon}
       <TextInput
         keyboardType={keyboardType}

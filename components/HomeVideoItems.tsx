@@ -131,7 +131,10 @@ const HomeVideoItems = ({
                                 <Text 
                                 numberOfLines={3}
                                 className='text-white font-pregular text-xs'>{createdBy}</Text>
-                                <TouchableOpacity className='bg-neutral-700 px-1 py-1 rounded-lg' onPress={() => setIsFollowed(!isFollowed)}>
+                                <TouchableOpacity 
+                                activeOpacity={.7}
+                                className='bg-neutral-700 px-1 py-1 rounded-lg' 
+                                onPress={() => setIsFollowed(!isFollowed)}>
                                     <Text className='text-white font-pmedium text-xs'>{isFollowed ? 'Following' : 'Follow'}</Text>
                                 </TouchableOpacity>
                             </View>

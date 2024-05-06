@@ -3,6 +3,7 @@ import { SplashScreen, Stack } from 'expo-router'
 import { useFonts } from 'expo-font'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 import { BottomSheetModalProvider } from '@gorhom/bottom-sheet'
+import { StatusBar } from 'expo-status-bar'
 
 const MainLayout = () => {
   const [fontsLoaded, error] = useFonts({
@@ -29,6 +30,7 @@ const MainLayout = () => {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <StatusBar style='light' />
       <BottomSheetModalProvider>
         <Stack screenOptions={{
           headerShown: false
