@@ -38,7 +38,8 @@ const SignUp = () => {
             />
             <CustumButton
               btnText='Sign In'
-              onPress={() => console.log('sign up')}
+              style='py-4'
+              onPress={() => router.replace(routes.home)}
             />
 
             <TouchableOpacity className='my-2' onPress={() => router.navigate('/forgotPassword')}>

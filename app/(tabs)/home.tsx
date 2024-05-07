@@ -17,12 +17,12 @@ const Home = () => {
 
   return (
     <>
-      <StatusBar style='light' />
 
       <FlatList
         // scrollEnabled={false} when bootom sheet is open 
         scrollEventThrottle={32}
         data={fakeVideosData}
+        decelerationRate={0}
         keyExtractor={item => item.id.toString()}
         pagingEnabled
         showsVerticalScrollIndicator={false}

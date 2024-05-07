@@ -39,12 +39,10 @@ const Comments = ({ comment: item }: Props) => {
         }
     }
 
-   
     return (
         <View className='px-3 mb-7 '>
             <View className='flex-row gap-3'>
                 <Pressable onPress={() => console.log('go to user page, ' + item.commentedBy)}>
-
                     <Image
                         source={{ uri: "https://cdn-icons-png.flaticon.com/512/147/147133.png" }}
                         className='w-10 h-10 rounded-full'

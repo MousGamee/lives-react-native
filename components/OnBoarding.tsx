@@ -57,6 +57,7 @@ const OnBoarding = () => {
                 pagingEnabled
                 bounces={false}
                 showsHorizontalScrollIndicator={false}
+                decelerationRate={0}
                 onScroll={Animated.event(
                     [{ nativeEvent: { contentOffset: { x: scrollX } } }],
                     { useNativeDriver: false },

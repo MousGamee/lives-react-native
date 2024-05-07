@@ -4,16 +4,19 @@ import React from 'react'
 type Props = {
     style? : string,
     btnText : string,
-    onPress : () => void
+    onPress : () => void,
+    icon? : JSX.Element
 }
 
 const CustumButton = ({ 
     style,
     btnText,
-    onPress
+    onPress, 
+    icon
 }: Props) => {
   return (
-    <TouchableOpacity className='bg-fuchsia-800 py-4 rounded-lg w-full' onPress={onPress}>
+    <TouchableOpacity className={`bg-fuchsia-800 rounded-lg ${style}`} onPress={onPress}>
+      { icon && icon }
       <Text className='text-center text-white text-lg font-pmedium'>{btnText}</Text>
     </TouchableOpacity>
   )
