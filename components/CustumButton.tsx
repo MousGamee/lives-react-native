@@ -15,7 +15,7 @@ const CustumButton = ({
     icon
 }: Props) => {
   return (
-    <TouchableOpacity className={`bg-fuchsia-800 rounded-lg ${style}`} onPress={onPress}>
+    <TouchableOpacity className={`rounded-lg ${style}`} onPress={onPress}>
       { icon && icon }
       <Text className='text-center text-white text-lg font-pmedium'>{btnText}</Text>
     </TouchableOpacity>

@@ -1,5 +1,6 @@
 import { AntDesign } from '@expo/vector-icons'
 import { LinearGradient } from 'expo-linear-gradient'
+import { useState } from 'react'
 import { View, Text, ImageBackground, useWindowDimensions, Animated, Pressable, Image } from 'react-native'
 import { fakeFollwingCard } from '../constants/fakeFollowingCard'
 import CustumButton from './CustumButton'
@@ -14,7 +15,7 @@ type Props = {
 
 
 const FollowingCard = ({ card, itemHeight, itemWidth, scale }: Props) => {
-
+    const [isFollowing, setIsFollowing] = useState<boolean>(false)
     return (
         <Animated.View style={{
             transform: [
@@ -22,13 +23,15 @@ const FollowingCard = ({ card, itemHeight, itemWidth, scale }: Props) => {
             ],
         }}>
 
-            <Pressable onPress={() => console.log(card.id)} style={{ paddingHorizontal: 10 }}>
+
+            <View style={{ paddingHorizontal: 10 }}>
                 <ImageBackground source={{ uri: card.image }}
                     resizeMode={'cover'}
                     className='justify-center items-center'
                     style={{ width: itemWidth, height: itemHeight }}
 
                 >
+
                     <Image source={{
                         uri: card.avatar
                     }}
@@ -46,14 +49,14 @@ const FollowingCard = ({ card, itemHeight, itemWidth, scale }: Props) => {
                             <Text className='text-white font-pmedium '>{card.followers} followers</Text>
                         </View>
                     </View>
-                    <CustumButton 
-                    style='flex-row gap-x-2 px-2 py-1 justify-center items-center z-10'
-                    btnText='Follow' 
-                    icon={<AntDesign name="plus" size={24} color="white" />}
-                    onPress={() => console.log('follow ' + card.userName)}/>
+                    <CustumButton
+                        style={`flex-row gap-x-2 px-2 py-1 justify-center items-center z-10 ${isFollowing ? 'bg-neutral-600' :  'bg-fuchsia-800'}`}
+                        btnText={isFollowing ? 'Unfollow' : 'Follow'}
+                        icon={!isFollowing && <AntDesign name="plus" size={24} color="white" />}
+                        onPress={() => setIsFollowing(!isFollowing)} />
                 </ImageBackground>
-            </Pressable>
-            <LinearGradient colors={["transparent", '#000']} className="absolute bottom-0 h-48 w-full" />
+            </View>
+            <LinearGradient colors={["transparent", '#000']} className="absolute bottom-0 h-20 w-full z-0" />
 
         </Animated.View>
     )

@@ -38,7 +38,7 @@ const SignUp = () => {
             />
             <CustumButton
               btnText='Sign In'
-              style='py-4'
+              style='py-4 bg-fuchsia-800'
               onPress={() => router.replace(routes.home)}
             />
 
